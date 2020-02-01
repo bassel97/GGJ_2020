@@ -34,10 +34,11 @@ public class Human : MonoBehaviour
     private void Update()
     {
         currentAction.CheckForAction();
+        anim.SetFloat("Walk Speed", navAgent.velocity.sqrMagnitude);
 
         if (inActive)
             return;
-
+        
         if (currentAction.IsActionFinished())
         {
             StartNextAction();
@@ -45,7 +46,7 @@ public class Human : MonoBehaviour
 
         if (goToRotation)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 3.0f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 8.0f);
         }
     }
 
@@ -74,6 +75,9 @@ public class Human : MonoBehaviour
                     break;
                 case ActionTypes.Exit:
                     action = new SitDown();
+                    break;
+                case ActionTypes.UseCashier:
+                    action = new UseCashier();
                     break;
                 default:
                     break;

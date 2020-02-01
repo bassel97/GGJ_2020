@@ -38,10 +38,11 @@ public class PeopleManager : MonoBehaviour
 
         for (int i = 0; i < noOfPeople; i++)
         {
-            Vector3 pos = new Vector3(Random.Range(xBorder.x, xBorder.y), 0, Random.Range(zBorder.x, zBorder.y));
+            Vector3 pos = transform.position + new Vector3(Random.Range(xBorder.x, xBorder.y), 0, Random.Range(zBorder.x, zBorder.y));
             Quaternion rot = Quaternion.Euler(Random.insideUnitCircle.normalized);
 
             GameObject humanGO = Instantiate(humanPrefab, pos, rot);
+            humanGO.transform.parent = transform;
             Human human = humanGO.GetComponent<Human>();
             human.SetStartParams(pos, rot);
 
@@ -62,7 +63,7 @@ public class PeopleManager : MonoBehaviour
         Color drawColor = Color.yellow;
         drawColor.a = 0.5f;
         Gizmos.color = drawColor;
-        Gizmos.DrawCube(Vector3.zero, new Vector3(xBorder.x - xBorder.y, .5f, zBorder.x - zBorder.y));
+        Gizmos.DrawCube(transform.position, new Vector3(xBorder.x - xBorder.y, .5f, zBorder.x - zBorder.y));
     }
 
 }

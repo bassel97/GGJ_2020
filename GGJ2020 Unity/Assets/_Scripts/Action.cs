@@ -6,7 +6,8 @@ public enum ActionTypes
 {
     DrinkWater,
     SitDown,
-    Exit
+    Exit,
+    UseCashier
 }
 
 public abstract class Action
@@ -39,7 +40,7 @@ public abstract class Action
 public class DrinkWater : Action
 {
     Transform waterSource;
-    float drinkTime = 2.0f;
+    float drinkTime = 11.0f;
     bool playedAnimation = false;
     bool endedAction = false;
 
@@ -81,7 +82,7 @@ public class DrinkWater : Action
 
     public override void ResetAction()
     {
-        drinkTime = 2.0f;
+        drinkTime = 11.0f;
         playedAnimation = false;
         endedAction = false;
     }
@@ -99,10 +100,74 @@ public class DrinkWater : Action
     }
 }
 
+public class UseCashier : Action
+{
+    Transform cashier;
+    float useCashierTime = 25.0f;
+    bool playedAnimation = false;
+    bool endedAction = false;
+
+    public override void CheckForAction()
+    {
+        if (endedAction)
+            return;
+
+        if (!cashier)
+            return;
+
+        if (playedAnimation)
+        {
+            if (useCashierTime >= 0)
+            {
+                useCashierTime -= Time.deltaTime;
+            }
+            else
+            {
+                cashier.GetComponent<FacilityObject>().SetFree();
+                endedAction = true;
+                actionTaker.FreeRotation();
+                actionTaker.PlayAnimation("Stop Thinking");
+            }
+            return;
+        }
+
+        if (Vector3.SqrMagnitude(cashier.position - actionTaker.transform.position) < 2.0f)
+        {
+            actionTaker.PlayAnimation("Start Thinking");
+            playedAnimation = true;
+            actionTaker.SetRotation(Quaternion.LookRotation(cashier.position - actionTaker.transform.position));
+        }
+    }
+
+    public override bool IsActionFinished()
+    {
+        return endedAction;
+    }
+
+    public override void ResetAction()
+    {
+        useCashierTime = 25.0f;
+        playedAnimation = false;
+        endedAction = false;
+    }
+
+    public override bool StartAction()
+    {
+        cashier = FacilitiesManager.instance.ReturnNearest(Facility.Cashier, actionTaker.transform.position);
+        if (cashier)
+        {
+            actionTaker.GoToPosition(cashier.position + cashier.forward);
+            cashier.GetComponent<FacilityObject>().SetInUse();
+            return true;
+        }
+        return false;
+    }
+}
+
 public class SitDown : Action
 {
     Transform chair;
-    float sitTime = 1.0f;
+    float sitTime = 15.0f;
     bool playedAnimation = false;
     bool endedAction = false;
 
@@ -123,13 +188,14 @@ public class SitDown : Action
             else
             {
                 chair.GetComponent<FacilityObject>().SetFree();
+                actionTaker.PlayAnimation("Stand Up");
                 endedAction = true;
                 actionTaker.FreeRotation();
             }
             return;
         }
 
-        if (Vector3.SqrMagnitude(chair.position - actionTaker.transform.position) < 2.0f)
+        if (Vector3.SqrMagnitude(chair.position - actionTaker.transform.position) < .5f)
         {
             actionTaker.PlayAnimation("Sit Down");
             playedAnimation = true;
@@ -144,7 +210,7 @@ public class SitDown : Action
 
     public override void ResetAction()
     {
-        sitTime = 1.0f;
+        sitTime = 15.0f;
         playedAnimation = false;
         endedAction = false;
     }
@@ -154,7 +220,7 @@ public class SitDown : Action
         chair = FacilitiesManager.instance.ReturnNearest(Facility.Chair, actionTaker.transform.position);
         if (chair)
         {
-            actionTaker.GoToPosition(chair.position + chair.forward);
+            actionTaker.GoToPosition(chair.position + chair.forward / 6.0f);
             chair.GetComponent<FacilityObject>().SetInUse();
             return true;
         }

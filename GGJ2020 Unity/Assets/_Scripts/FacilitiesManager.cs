@@ -6,7 +6,8 @@ public enum Facility
 {
     WaterSource,
     Chair,
-    ExitLoc
+    ExitLoc,
+    Cashier
 }
 
 public class FacilitiesManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class FacilitiesManager : MonoBehaviour
     private GameObject[] waterSources;
     private GameObject[] chairs;
     private GameObject[] exitLocations;
+    private GameObject[] cashiers;
 
     public static FacilitiesManager instance;
 
@@ -30,6 +32,7 @@ public class FacilitiesManager : MonoBehaviour
         waterSources = GameObject.FindGameObjectsWithTag("WaterSource");
         chairs = GameObject.FindGameObjectsWithTag("Chair");
         exitLocations = GameObject.FindGameObjectsWithTag("ExitLocation");
+        cashiers = GameObject.FindGameObjectsWithTag("Cashier");
 
         //isSetUp = true;
     }
@@ -54,6 +57,11 @@ public class FacilitiesManager : MonoBehaviour
             case Facility.ExitLoc:
                 objectsArray = exitLocations;
                 break;
+
+            case Facility.Cashier:
+                objectsArray = cashiers;
+                break;
+
             default:
                 break;
         }
