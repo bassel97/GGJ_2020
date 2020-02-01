@@ -60,6 +60,12 @@ public class FacilitiesManager : MonoBehaviour
 
         for (int i = 0; i < objectsArray.Length; i++)
         {
+            //TODO clean for performance
+            FacilityObject facilityObject = objectsArray[i].GetComponent<FacilityObject>();
+
+            if (facilityObject.IsInUse())
+                continue;
+
             float sqrDist = Vector3.SqrMagnitude(pos - objectsArray[i].transform.position);
             if (sqrDist < minDistance)
             {
@@ -68,7 +74,22 @@ public class FacilitiesManager : MonoBehaviour
             }
         }
 
-
         return nearestLocation;
+    }
+
+    public void ResetFacilities()
+    {
+        for (int i = 0; i < waterSources.Length; i++)
+        {
+            waterSources[i].GetComponent<FacilityObject>().SetFree();
+        }
+        for (int i = 0; i < chairs.Length; i++)
+        {
+            chairs[i].GetComponent<FacilityObject>().SetFree();
+        }
+        for (int i = 0; i < exitLocations.Length; i++)
+        {
+            exitLocations[i].GetComponent<FacilityObject>().SetFree();
+        }
     }
 }

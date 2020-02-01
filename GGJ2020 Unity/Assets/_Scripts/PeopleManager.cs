@@ -7,6 +7,8 @@ public class PeopleManager : MonoBehaviour
     [Header("Population Data")]
     [SerializeField] private int noOfPeople = 0;
     [SerializeField] [Range(0, 0.5f)] private float robbersPerc = 0;
+    [SerializeField] private Vector2 xBorder;
+    [SerializeField] private Vector2 zBorder;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject humanPrefab = null;
@@ -36,8 +38,9 @@ public class PeopleManager : MonoBehaviour
 
         for (int i = 0; i < noOfPeople; i++)
         {
-            Vector3 pos = Vector3.zero;
-            Quaternion rot = Quaternion.identity;
+            Vector3 pos = new Vector3(Random.Range(xBorder.x, xBorder.y), 0, Random.Range(zBorder.x, zBorder.y));
+            Quaternion rot = Quaternion.Euler(Random.insideUnitCircle.normalized);
+
             GameObject humanGO = Instantiate(humanPrefab, pos, rot);
             Human human = humanGO.GetComponent<Human>();
             human.SetStartParams(pos, rot);
@@ -46,11 +49,20 @@ public class PeopleManager : MonoBehaviour
             {
 
             }
-            
+
             people.Add(human);
             human.SetNoOfActions(5);
             human.SetUpActions();
             human.StartNextAction();
         }
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Color drawColor = Color.yellow;
+        drawColor.a = 0.5f;
+        Gizmos.color = drawColor;
+        Gizmos.DrawCube(Vector3.zero, new Vector3(xBorder.x - xBorder.y, .5f, zBorder.x - zBorder.y));
+    }
+
 }

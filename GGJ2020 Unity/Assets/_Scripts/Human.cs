@@ -33,10 +33,11 @@ public class Human : MonoBehaviour
 
     private void Update()
     {
+        currentAction.CheckForAction();
+
         if (inActive)
             return;
 
-        currentAction.CheckForAction();
         if (currentAction.IsActionFinished())
         {
             StartNextAction();
@@ -72,7 +73,7 @@ public class Human : MonoBehaviour
                     action = new SitDown();
                     break;
                 case ActionTypes.Exit:
-                    action = new DrinkWater();
+                    action = new SitDown();
                     break;
                 default:
                     break;
@@ -91,14 +92,17 @@ public class Human : MonoBehaviour
 
     public void StartNextAction()
     {
-        if (currActionIndex >= actions.Count)
-            return;
-
         Action action = actions[currActionIndex];
         currActionIndex++;
-        currActionIndex = currActionIndex % actions.Count;
+        currActionIndex = currActionIndex % (actions.Count);
 
-        action.StartAction();
+        while (!action.StartAction())
+        {
+            action = actions[currActionIndex];
+            currActionIndex++;
+            currActionIndex = currActionIndex % (actions.Count);
+        }
+
         currentAction = action;
     }
 
@@ -130,9 +134,13 @@ public class Human : MonoBehaviour
         goToRotation = false;
     }
 
-    public void StopHumanActions()
+    public void SetInActive()
     {
         inActive = true;
+    }
+
+    public void StopHumanActions()
+    {
         navAgent.isStopped = true;
     }
 

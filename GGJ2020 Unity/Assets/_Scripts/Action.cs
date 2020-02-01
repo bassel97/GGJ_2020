@@ -22,7 +22,7 @@ public abstract class Action
 
     protected Human actionTaker;
 
-    public abstract void StartAction();
+    public abstract bool StartAction();
 
     public abstract bool IsActionFinished();
 
@@ -48,14 +48,18 @@ public class DrinkWater : Action
         if (endedAction)
             return;
 
+        if (!waterSource)
+            return;
+
         if (playedAnimation)
         {
-            if(drinkTime >= 0)
+            if (drinkTime >= 0)
             {
                 drinkTime -= Time.deltaTime;
             }
             else
             {
+                waterSource.GetComponent<FacilityObject>().SetFree();
                 endedAction = true;
                 actionTaker.FreeRotation();
             }
@@ -82,10 +86,16 @@ public class DrinkWater : Action
         endedAction = false;
     }
 
-    public override void StartAction()
+    public override bool StartAction()
     {
         waterSource = FacilitiesManager.instance.ReturnNearest(Facility.WaterSource, actionTaker.transform.position);
-        actionTaker.GoToPosition(waterSource.position + waterSource.forward);
+        if (waterSource)
+        {
+            actionTaker.GoToPosition(waterSource.position + waterSource.forward);
+            waterSource.GetComponent<FacilityObject>().SetInUse();
+            return true;
+        }
+        return false;
     }
 }
 
@@ -101,6 +111,9 @@ public class SitDown : Action
         if (endedAction)
             return;
 
+        if (!chair)
+            return;
+
         if (playedAnimation)
         {
             if (sitTime >= 0)
@@ -109,6 +122,7 @@ public class SitDown : Action
             }
             else
             {
+                chair.GetComponent<FacilityObject>().SetFree();
                 endedAction = true;
                 actionTaker.FreeRotation();
             }
@@ -135,10 +149,16 @@ public class SitDown : Action
         endedAction = false;
     }
 
-    public override void StartAction()
+    public override bool StartAction()
     {
         chair = FacilitiesManager.instance.ReturnNearest(Facility.Chair, actionTaker.transform.position);
-        actionTaker.GoToPosition(chair.position + chair.forward);
+        if (chair)
+        {
+            actionTaker.GoToPosition(chair.position + chair.forward);
+            chair.GetComponent<FacilityObject>().SetInUse();
+            return true;
+        }
+        return false;
     }
 }
 
@@ -149,7 +169,7 @@ public class ExitAction : Action
 
     public override void CheckForAction()
     {
-        if (Vector3.SqrMagnitude(exitLoc.position - actionTaker.transform.position) < 1.0f)
+        if (Vector3.SqrMagnitude(exitLoc.position - actionTaker.transform.position) < 2.0f)
         {
             actionTaker.StopHumanActions();
             actionTaker.gameObject.SetActive(false);
@@ -167,9 +187,11 @@ public class ExitAction : Action
         actionEnded = false;
     }
 
-    public override void StartAction()
+    public override bool StartAction()
     {
+        actionTaker.SetInActive();
         exitLoc = FacilitiesManager.instance.ReturnNearest(Facility.ExitLoc, actionTaker.transform.position);
         actionTaker.GoToPosition(exitLoc.position);
+        return true;
     }
 }
