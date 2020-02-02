@@ -8,10 +8,15 @@ public class Human : MonoBehaviour
 {
     private NavMeshAgent navAgent;
     [SerializeField] private Animator anim = null;
+    [SerializeField] private Renderer rendererComp = null;
 
     [Header("Human Info")]
     [SerializeField] private int noOfActions = 0;
     [SerializeField] private bool isCircular = true;
+
+    [Header("Robber Info")]
+    [SerializeField] private GameObject weapon;
+    private bool isPublicAttacker = false;
 
     [SerializeField] private List<Action> actions = new List<Action>();
     private Action currentAction = null;
@@ -24,7 +29,7 @@ public class Human : MonoBehaviour
     private Vector3 startPos = Vector3.zero;
     private Quaternion startRot = Quaternion.identity;
 
-    private bool isRobber = false;
+    private bool isAttacker = false;
 
     private void Awake()
     {
@@ -38,7 +43,7 @@ public class Human : MonoBehaviour
 
         if (inActive)
             return;
-        
+
         if (currentAction.IsActionFinished())
         {
             StartNextAction();
@@ -79,6 +84,9 @@ public class Human : MonoBehaviour
                 case ActionTypes.UseCashier:
                     action = new UseCashier();
                     break;
+                case ActionTypes.StartAttack:
+                    action = new SitDown();
+                    break;
                 default:
                     break;
             }
@@ -110,9 +118,16 @@ public class Human : MonoBehaviour
         currentAction = action;
     }
 
-    public void SetIsRobber()
+    public void SetIsAttacker()
     {
-        isRobber = true;
+        isAttacker = true;
+        int lastNormalAction = (int)(actions.Count / 3.0f);
+        int attackAt = Random.Range(0, lastNormalAction);
+
+        Action attackAction = new StartAttack();
+        attackAction.SetActionTaker(this);
+
+        actions.Insert(lastNormalAction + attackAt, attackAction);
     }
 
     public void GoToPosition(Vector3 position)
@@ -163,12 +178,31 @@ public class Human : MonoBehaviour
         transform.position = startPos;
         transform.rotation = startRot;
 
+        navAgent.Warp(startPos);
+        FreeRotation();
+
+        rendererComp.material.color = Color.white;
+
         for (int i = 0; i < actions.Count; i++)
         {
             actions[i].ResetAction();
         }
 
+        weapon.SetActive(false);
+
+        isPublicAttacker = false;
+
+        anim.SetTrigger("Stand Up");
+
         currActionIndex = 0;
         StartNextAction();
+    }
+
+    public void GetTheGun()
+    {
+        isPublicAttacker = true;
+        weapon.SetActive(true);
+        anim.SetTrigger("Got Gun");
+        rendererComp.material.color = Color.black;
     }
 }

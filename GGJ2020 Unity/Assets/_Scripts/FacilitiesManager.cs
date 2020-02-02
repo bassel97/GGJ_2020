@@ -99,5 +99,9 @@ public class FacilitiesManager : MonoBehaviour
         {
             exitLocations[i].GetComponent<FacilityObject>().SetFree();
         }
+        for (int i = 0; i < cashiers.Length; i++)
+        {
+            cashiers[i].GetComponent<FacilityObject>().SetFree();
+        }
     }
 }

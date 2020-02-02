@@ -7,7 +7,8 @@ public enum ActionTypes
     DrinkWater,
     SitDown,
     Exit,
-    UseCashier
+    UseCashier,
+    StartAttack
 }
 
 public abstract class Action
@@ -30,6 +31,8 @@ public abstract class Action
     public abstract void CheckForAction();
 
     public abstract void ResetAction();
+
+    public abstract void EndAction();
 
     public void SetActionTaker(Human human)
     {
@@ -73,6 +76,11 @@ public class DrinkWater : Action
             playedAnimation = true;
             actionTaker.SetRotation(Quaternion.LookRotation(waterSource.position - actionTaker.transform.position));
         }
+    }
+
+    public override void EndAction()
+    {
+        waterSource.GetComponent<FacilityObject>().SetFree();
     }
 
     public override bool IsActionFinished()
@@ -139,6 +147,11 @@ public class UseCashier : Action
         }
     }
 
+    public override void EndAction()
+    {
+        cashier.GetComponent<FacilityObject>().SetFree();
+    }
+
     public override bool IsActionFinished()
     {
         return endedAction;
@@ -167,7 +180,7 @@ public class UseCashier : Action
 public class SitDown : Action
 {
     Transform chair;
-    float sitTime = 15.0f;
+    float sitTime = 10.0f;
     bool playedAnimation = false;
     bool endedAction = false;
 
@@ -203,6 +216,11 @@ public class SitDown : Action
         }
     }
 
+    public override void EndAction()
+    {
+        chair.GetComponent<FacilityObject>().SetFree();
+    }
+
     public override bool IsActionFinished()
     {
         return endedAction;
@@ -210,7 +228,7 @@ public class SitDown : Action
 
     public override void ResetAction()
     {
-        sitTime = 15.0f;
+        sitTime = 10.0f;
         playedAnimation = false;
         endedAction = false;
     }
@@ -228,6 +246,39 @@ public class SitDown : Action
     }
 }
 
+public class StartAttack : Action
+{
+    float sitTime = 15.0f;
+    bool playedAnimation = false;
+    bool endedAction = false;
+
+    public override void CheckForAction()
+    {
+        if (endedAction)
+            return;
+    }
+
+    public override void EndAction()
+    {
+
+    }
+
+    public override bool IsActionFinished()
+    {
+        return endedAction;
+    }
+
+    public override void ResetAction()
+    {
+    }
+
+    public override bool StartAction()
+    {
+        actionTaker.GetTheGun();
+        return true;
+    }
+}
+
 public class ExitAction : Action
 {
     Transform exitLoc;
@@ -241,6 +292,10 @@ public class ExitAction : Action
             actionTaker.gameObject.SetActive(false);
             actionEnded = true;
         }
+    }
+
+    public override void EndAction()
+    {
     }
 
     public override bool IsActionFinished()

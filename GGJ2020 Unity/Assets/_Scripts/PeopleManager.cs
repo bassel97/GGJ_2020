@@ -6,7 +6,7 @@ public class PeopleManager : MonoBehaviour
 {
     [Header("Population Data")]
     [SerializeField] private int noOfPeople = 0;
-    [SerializeField] [Range(0, 0.5f)] private float robbersPerc = 0;
+    [SerializeField] [Range(0, 0.5f)] private float attackersPerc = 0;
     [SerializeField] private Vector2 xBorder;
     [SerializeField] private Vector2 zBorder;
 
@@ -25,6 +25,7 @@ public class PeopleManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            FacilitiesManager.instance.ResetFacilities();
             for (int i = 0; i < people.Count; i++)
             {
                 people[i].ResetHuman();
@@ -45,15 +46,16 @@ public class PeopleManager : MonoBehaviour
             humanGO.transform.parent = transform;
             Human human = humanGO.GetComponent<Human>();
             human.SetStartParams(pos, rot);
+            
+            people.Add(human);
+            human.SetNoOfActions(12);
+            human.SetUpActions();
 
-            if (Random.Range(0, 1.0f) > robbersPerc)
+            if (Random.Range(0, 1.0f) > attackersPerc)
             {
-
+                human.SetIsAttacker();
             }
 
-            people.Add(human);
-            human.SetNoOfActions(5);
-            human.SetUpActions();
             human.StartNextAction();
         }
     }
