@@ -256,6 +256,9 @@ public class StartAttack : Action
     {
         if (endedAction)
             return;
+
+        Debug.Log("Looking for citizen");
+        actionTaker.KillNonPublicAttackers();
     }
 
     public override void EndAction()
@@ -275,6 +278,8 @@ public class StartAttack : Action
     public override bool StartAction()
     {
         actionTaker.GetTheGun();
+        Transform nearestCashier = FacilitiesManager.instance.ReturnNearestCashier(actionTaker.transform.position);
+        actionTaker.GoToPosition(nearestCashier.position + nearestCashier.forward);
         return true;
     }
 }

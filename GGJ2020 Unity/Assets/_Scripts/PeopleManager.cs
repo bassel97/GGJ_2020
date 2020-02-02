@@ -7,8 +7,8 @@ public class PeopleManager : MonoBehaviour
     [Header("Population Data")]
     [SerializeField] private int noOfPeople = 0;
     [SerializeField] [Range(0, 0.5f)] private float attackersPerc = 0;
-    [SerializeField] private Vector2 xBorder;
-    [SerializeField] private Vector2 zBorder;
+    [SerializeField] private Vector2 xBorder = Vector2.zero;
+    [SerializeField] private Vector2 zBorder = Vector2.zero;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject humanPrefab = null;

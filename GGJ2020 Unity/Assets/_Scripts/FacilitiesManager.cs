@@ -85,6 +85,26 @@ public class FacilitiesManager : MonoBehaviour
         return nearestLocation;
     }
 
+    public Transform ReturnNearestCashier(Vector3 pos)
+    {
+        float minDistance = float.MaxValue;
+        Transform nearestLocation = null;
+
+        GameObject[] objectsArray = cashiers;
+
+        for (int i = 0; i < objectsArray.Length; i++)
+        {
+            float sqrDist = Vector3.SqrMagnitude(pos - objectsArray[i].transform.position);
+            if (sqrDist < minDistance)
+            {
+                minDistance = sqrDist;
+                nearestLocation = objectsArray[i].transform;
+            }
+        }
+
+        return nearestLocation;
+    }
+
     public void ResetFacilities()
     {
         for (int i = 0; i < waterSources.Length; i++)

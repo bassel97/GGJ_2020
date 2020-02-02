@@ -1,0 +1,193 @@
+fileFormatVersion: 2
+guid: 2ca6a7408753e5343841b347a9a8ec65
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Dec.000
+    100002: Dec.001
+    100004: Dec.002
+    100006: Dec.003
+    100008: Dec.005
+    100010: Dec.006
+    100012: Dec.009
+    100014: Decorations
+    100016: Drawing
+    100018: Drawing.000
+    100020: Drawing.001
+    100022: Drawing.002
+    100024: Drawing.003
+    100026: Drawing.004
+    100028: Drawing.005
+    100030: Drawings
+    100032: Level
+    100034: //RootNode
+    100036: Light01
+    100038: Light01.001
+    100040: Light01.002
+    100042: Roof
+    400000: Dec.000
+    400002: Dec.001
+    400004: Dec.002
+    400006: Dec.003
+    400008: Dec.005
+    400010: Dec.006
+    400012: Dec.009
+    400014: Decorations
+    400016: Drawing
+    400018: Drawing.000
+    400020: Drawing.001
+    400022: Drawing.002
+    400024: Drawing.003
+    400026: Drawing.004
+    400028: Drawing.005
+    400030: Drawings
+    400032: Level
+    400034: //RootNode
+    400036: Light01
+    400038: Light01.001
+    400040: Light01.002
+    400042: Roof
+    2100000: No Name
+    2300000: Dec.000
+    2300002: Dec.001
+    2300004: Dec.002
+    2300006: Dec.003
+    2300008: Dec.005
+    2300010: Dec.006
+    2300012: Dec.009
+    2300014: Drawing
+    2300016: Drawing.000
+    2300018: Drawing.001
+    2300020: Drawing.002
+    2300022: Drawing.003
+    2300024: Drawing.004
+    2300026: Drawing.005
+    2300028: Level
+    2300030: Light01
+    2300032: Light01.001
+    2300034: Light01.002
+    2300036: Roof
+    3300000: Dec.000
+    3300002: Dec.001
+    3300004: Dec.002
+    3300006: Dec.003
+    3300008: Dec.005
+    3300010: Dec.006
+    3300012: Dec.009
+    3300014: Drawing
+    3300016: Drawing.000
+    3300018: Drawing.001
+    3300020: Drawing.002
+    3300022: Drawing.003
+    3300024: Drawing.004
+    3300026: Drawing.005
+    3300028: Level
+    3300030: Light01
+    3300032: Light01.001
+    3300034: Light01.002
+    3300036: Roof
+    4300000: Light01.002
+    4300002: Light01.001
+    4300004: Light01
+    4300006: Drawing.005
+    4300008: Drawing.004
+    4300010: Drawing.003
+    4300012: Drawing.002
+    4300014: Drawing
+    4300016: Drawing.000
+    4300018: Drawing.001
+    4300020: Dec.003
+    4300022: Dec.009
+    4300024: Dec.006
+    4300026: Dec.005
+    4300028: Dec.002
+    4300030: Dec.000
+    4300032: Dec.001
+    4300034: Roof
+    4300036: Level
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
