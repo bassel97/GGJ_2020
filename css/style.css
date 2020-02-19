@@ -1,0 +1,132 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: sans-serif, Arial, Helvetica;
+    height: 100%;
+    margin: 0;
+}
+
+header {
+    background-color: #666;
+    padding: 10px;
+    text-align: center;
+    font-size: 35px;
+    height: 10%;
+    position: relative;
+}
+
+.gameName {
+    /* height: 100%; 
+    width: 50%; */
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+nav {
+    float: left;
+    width: 50%;
+    height: 100%;
+    background: #ccc;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.gameLogo {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} 
+
+.Buttons{
+    margin: 5px;
+    border-radius: 10px;
+    background-color: #666; /* Green */
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    width: 100%;
+}
+
+.Buttons:hover {
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+article {
+    float: left;
+    padding: 20px;
+    width: 50%;
+    background-color: #f1f1f1;
+    height: 100%;
+    position: relative;
+}
+
+section{
+    height: 85%;
+}
+
+/* Clear floats after the columns */
+section:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.GameDescription{
+    text-align: justify;
+    text-transform: uppercase;
+    align-self: center;
+    margin-right: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+footer {
+    background-color: #777;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    height: 5%;
+}
+
+@media (max-width: 720px) {
+    nav, article, section {
+      width: 100%;
+      height: fit-content;
+      position: static;
+    }
+
+    footer, article {
+        height: auto;
+    }
+
+    .GameDescription{
+        align-self: center;
+        position: static;
+        transform: translate(0%, 0%);
+    }
+
+    .gameLogo{
+        position: static;
+        top: 0%;
+        left: 0%;
+        transform: translate(0%, 0%);
+    }
+}
