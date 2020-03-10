@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="icon" href="images/GameLogo.png">
     <title>DEMO GAME | Unity Game</title>
 </head>
+
 <body>
 
     <header>
@@ -18,33 +20,39 @@
         <!-- <nav class="time-travel-nav"></nav> -->
 
         <article class="timeTravelArticle">
-            
+
             <div class="GameDescriptionTimeTravel">
-                
+
                 <p>
                     The challenge was saving the data about each individual in the population for any amount of time.
-                    The traditional way of saving “Position”, “Rotation” and “Animation state” for each frame or even for every couple of frames
+                    The traditional way of saving “Position”, “Rotation” and “Animation state” for each frame or even
+                    for every couple of frames
                     doesn’t seem to be efficient.
                     <br>
                     <B>SO HOW TO GET AROUND THIS?</B>
                     <br>
                     The approach I took in the jam was to create a system similar to a state machine
-                    where each individual in the population only keeps a list of the actions that he should  take .
+                    where each individual in the population only keeps a list of the actions that he should take .
                     The list is randomly generated at the start of the level.
                 </p>
 
                 <img src="images/GGJ2020_StateMachine.png" class="GameMechanicsImages">
 
                 <br>
+                <br>
 
                 <p>
-                    The individual’s start position and rotation is generated once at the start of the level and then saved.
+                    The individual’s start position and rotation is generated once at the start of the level and then
+                    saved.
                     <br>
-                    Combining the individual’s initial position and rotation  with the list of actions generated should guarantee
+                    Combining the individual’s initial position and rotation with the list of actions generated should
+                    guarantee
                     to repeat the same behaviour every time <i>“TimeManager.instance.ResetManager();”</i> is called.
                     <br>
-                    The attacker’s logic is just the same as any of the individuals with the exception of an  attack action put
-                    randomly in the list. On attacking an individual, the actions’ list index stops from incrementing and the individual is put in the death state.
+                    The attacker’s logic is just the same as any of the individuals with the exception of an attack
+                    action put
+                    randomly in the list. On attacking an individual, the actions’ list index stops from incrementing
+                    and the individual is put in the death state.
                 </p>
 
                 <button class="ButtonsTT" onclick="window.location.href = 'index.html';">
@@ -60,4 +68,5 @@
         A game by <a href="https://www.linkedin.com/in/bassel-mostafa/" target="_blank">Bassel Mostafa</a>.
     </footer>
 </body>
+
 </html>
