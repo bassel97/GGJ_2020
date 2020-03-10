@@ -25,12 +25,18 @@ public class PeopleManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            FacilitiesManager.instance.ResetFacilities();
-            for (int i = 0; i < people.Count; i++)
-            {
-                people[i].ResetHuman();
-            }
+            ResetScene();
         }
+    }
+
+    public void ResetScene()
+    {
+        FacilitiesManager.instance.ResetFacilities();
+        for (int i = 0; i < people.Count; i++)
+        {
+            people[i].ResetHuman();
+        }
+        TimeManager.instance.ResetManager();
     }
 
     public void PopulateArea()
